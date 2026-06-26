@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrés · Zenith Code</title>
+  <meta name="description" content="Habla con Andrés, el asistente de ventas de Zenith Code. Código que vende." />
+  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0A0A0A;
+      --black2:  #111111;
+      --orange:  #F5A623;
+      --orange2: #E09415;
+      --white:   #FFFFFF;
+      --gray:    #888888;
+      --border:  #222222;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP ANNOUNCEMENT BAR ── */
+    .topbar {
+      width: 100%;
+      background: var(--orange);
+      color: #000;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 16px;
+      letter-spacing: 0.02em;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 38px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo .prompt {
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+    .nav-cta {
+      background: var(--orange);
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange2); }
+
+    /* ── MAIN ── */
+    main {
+      min-height: 100vh;
+      padding-top: 110px;
+      padding-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      position: relative;
+    }
+
+    /* ── BACKGROUND GRID ── */
+    main::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GLOW ── */
+    .glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 65%);
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    /* ── LOCATION PILL ── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #333;
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fade-up 0.6s ease forwards 0.2s;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22C55E;
+      animation: pulse-green 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%       { box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+    }
+
+    /* ── HEADLINE ── */
+    .headline {
+      font-size: clamp(36px, 9vw, 52px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 0.35s;
+    }
+
+    .headline .accent { color: var(--orange); }
+
+    /* ── TYPING LINE ── */
+    .typing-wrap {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      min-height: 48px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 0.5s;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--orange);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ── AVATAR ROW ── */
+    .agent-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 0.6s;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2A1A00, #1A1000);
+      border: 2px solid rgba(245,166,35,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--orange);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #22C55E;
+      border: 2px solid var(--black);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+
+    .agent-info { display: flex; flex-direction: column; gap: 2px; }
+
+    .agent-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .agent-role {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .agent-role span { color: var(--orange); font-weight: 500; }
+
+    /* ── WIDGET CARD ── */
+    .widget-card {
+      width: 100%;
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 0.75s;
+      box-shadow: 0 0 0 1px rgba(245,166,35,0.04), 0 20px 50px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Orange top accent line */
+    .widget-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .widget-hint {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    elevenlabs-convai {
+      width: 100%;
+    }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      width: 100%;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 0.9s;
+    }
+
+    .trust-item {
+      flex: 1;
+      min-width: 100px;
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trust-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -0.02em;
+    }
+
+    .trust-label {
+      font-size: 10px;
+      color: var(--gray);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── WA BUTTON ── */
+    .wa-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 4px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 1.05s;
+    }
+
+    .wa-btn:hover {
+      background: var(--orange2);
+      transform: translateY(-1px);
+    }
+
+    .wa-btn svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 11px;
+      color: #444;
+      padding: 20px;
+      opacity: 0;
+      animation: fade-up 0.7s ease forwards 1.2s;
+    }
+
+    footer a { color: var(--gray); text-decoration: none; }
+    footer a:hover { color: var(--orange); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── DOTS LOADER (shown while ElevenLabs loads) ── */
+    .dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    .dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0.3;
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dot-bounce {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40%            { opacity: 1;   transform: scale(1.1); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      .topbar { font-size: 11px; padding: 8px 12px; }
+      nav { padding: 12px 16px; top: 36px; }
+      main { padding-top: 100px; }
+      .headline { font-size: clamp(30px, 10vw, 40px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    Cupo limitado · solo 4 proyectos nuevos en junio · respuesta en menos de 1h por WhatsApp
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://myzenith.space" class="nav-logo">
+      <span class="prompt">&gt;_</span> Zenith Code
+    </a>
+    <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto"
+       class="nav-cta" target="_blank">Cotizar</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="glow"></div>
+
+    <div class="content">
+
+      <!-- PILL -->
+      <div class="pill">
+        <div class="pill-dot"></div>
+        Asistente disponible ahora · León, Guanajuato
+      </div>
+
+      <!-- HEADLINE -->
+      <h1 class="headline">
+        Habla con<br><span class="accent">Andrés.</span>
+      </h1>
+
+      <!-- TYPING -->
+      <div class="typing-wrap">
+        <span id="typing-text"></span><span class="typing-cursor"></span>
+      </div>
+
+      <!-- AGENT ROW -->
+      <div class="agent-row">
+        <div class="avatar">A</div>
+        <div class="agent-info">
+          <div class="agent-name">Andrés</div>
+          <div class="agent-role">Asistente de ventas · <span>Zenith Code</span></div>
+        </div>
+      </div>
+
+      <!-- WIDGET -->
+      <div class="widget-card">
+        <div class="widget-hint">Presiona para hablar</div>
+        <div class="dots" id="dots-loader">
+          <span></span><span></span><span></span>
+        </div>
+        <elevenlabs-convai
+          agent-id="agent_9401kw0vskkwf0s9v2h3enkd1cp3"
+          branch-id="agtbrch_3901kw0vsm4kftjt9xdgm7x3vcrb">
+        </elevenlabs-convai>
+      </div>
+
+      <!-- TRUST STRIP -->
+      <div class="trust-strip">
+        <div class="trust-item">
+          <div class="trust-val">95+</div>
+          <div class="trust-label">PageSpeed</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">21d</div>
+          <div class="trust-label">Entrega</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">+40%</div>
+          <div class="trust-label">Conversión</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-val">&lt;1h</div>
+          <div class="trust-label">Respuesta</div>
+        </div>
+      </div>
+
+      <!-- WA BUTTON -->
+      <a class="wa-btn"
+         href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto"
+         target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Cotizar por WhatsApp →
+      </a>
+
+    </div><!-- /content -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://myzenith.space" target="_blank">myzenith.space</a>
+    &nbsp;·&nbsp; León, Guanajuato, México
+    &nbsp;·&nbsp; Código que vende.
+  </footer>
+
+  <script>
+    // ── TYPING ANIMATION ──
+    const phrases = [
+      "Cuéntame qué necesita tu negocio...",
+      "Te recomiendo el servicio correcto.",
+      "Cotiza en menos de 2 minutos.",
+      "Respondo en español, English, Français.",
+    ];
+    let pi = 0, ci = 0, deleting = false;
+    const el = document.getElementById('typing-text');
+
+    function typeLoop() {
+      const phrase = phrases[pi];
+      if (!deleting) {
+        el.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) {
+          deleting = true;
+          setTimeout(typeLoop, 2200);
+          return;
+        }
+        setTimeout(typeLoop, 42);
+      } else {
+        el.textContent = phrase.slice(0, --ci);
+        if (ci === 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(typeLoop, 400);
+          return;
+        }
+        setTimeout(typeLoop, 22);
+      }
+    }
+    setTimeout(typeLoop, 900);
+
+    // ── HIDE DOTS WHEN WIDGET LOADS ──
+    const dotsEl = document.getElementById('dots-loader');
+    const observer = new MutationObserver(() => {
+      const widget = document.querySelector('elevenlabs-convai');
+      if (widget && widget.shadowRoot) {
+        dotsEl.style.display = 'none';
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => { dotsEl.style.display = 'none'; }, 4000);
+  </script>
+
+</body>
+</html>
