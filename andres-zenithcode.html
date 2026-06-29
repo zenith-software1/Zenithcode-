@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Andrés · Zenith Code</title>
-  <meta name="description" content="Habla con Andrés, el asistente de ventas de Zenith Code. Código que vende." />
-  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+  <meta name="description" content="Asistente temporalmente no disponible." />
+  <script>location.replace('/');</script>
+  <!-- ElevenLabs desactivado: <script src="https://elevenlabs.io/convai-widget/index.js" async></script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -499,17 +501,18 @@
         </div>
       </div>
 
-      <!-- WIDGET -->
+      <!-- WIDGET (oculto — ElevenLabs desactivado)
       <div class="widget-card">
         <div class="widget-hint">Presiona para hablar</div>
         <div class="dots" id="dots-loader">
           <span></span><span></span><span></span>
         </div>
         <elevenlabs-convai
-          agent-id="agent_9401kw0vskkwf0s9v2h3enkd1cp3"
-          branch-id="agtbrch_3901kw0vsm4kftjt9xdgm7x3vcrb">
+          agent-id="REDACTED"
+          branch-id="REDACTED">
         </elevenlabs-convai>
       </div>
+      -->
 
       <!-- TRUST STRIP -->
       <div class="trust-strip">
@@ -585,7 +588,7 @@
     }
     setTimeout(typeLoop, 900);
 
-    // ── HIDE DOTS WHEN WIDGET LOADS ──
+    /* ElevenLabs desactivado
     const dotsEl = document.getElementById('dots-loader');
     const observer = new MutationObserver(() => {
       const widget = document.querySelector('elevenlabs-convai');
@@ -596,6 +599,7 @@
     });
     observer.observe(document.body, { childList: true, subtree: true });
     setTimeout(() => { dotsEl.style.display = 'none'; }, 4000);
+    */
   </script>
 
 </body>
