@@ -249,6 +249,7 @@
   </script>
 
   <style>
+    .zenith-hidden { display: none !important; visibility: hidden !important; pointer-events: none !important; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body { background:#000; color:#fff; font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
     ::selection { background:#F5A623; color:#000; }
@@ -365,7 +366,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm text-white/40">
         <a href="#nosotros" class="hover:text-white transition">Nosotros</a>
         <a href="#servicios" class="hover:text-white transition">Servicios</a>
-        <a href="andres-zenithcode.html" class="hover:text-white transition">Agente IA</a>
+        <a href="andres-zenithcode.html" class="zenith-hidden hover:text-white transition">Agente IA</a>
         <a href="#resultados" class="hover:text-white transition">Demos</a>
         <a href="#blog" class="hover:text-white transition">Blog</a>
         <a href="#contacto" class="hover:text-neon transition">Contacto</a>
@@ -396,7 +397,7 @@
     <nav class="container-x flex-1 flex flex-col justify-center gap-1 py-10">
       <a href="#nosotros" class="menu-link">Nosotros <span class="arr">→</span></a>
       <a href="#servicios" class="menu-link">Servicios <span class="arr">→</span></a>
-      <a href="andres-zenithcode.html" class="menu-link">Agente IA <span class="arr">→</span></a>
+      <a href="andres-zenithcode.html" class="menu-link zenith-hidden">Agente IA <span class="arr">→</span></a>
       <a href="#resultados" class="menu-link">Demos <span class="arr">→</span></a>
       <a href="#blog" class="menu-link">Blog <span class="arr">→</span></a>
       <a href="#cotizador" class="menu-link">Cotizador <span class="arr">→</span></a>
@@ -628,7 +629,7 @@
               <p class="mt-5 text-[11px] text-white/35 font-mono leading-relaxed">Incluye: diseño del flujo · base de conocimiento inicial · integración con WhatsApp o sitio web</p>
               <div class="mt-6 flex flex-wrap gap-4">
                 <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20un%20agente%20IA%20para%20mi%20negocio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-neon font-mono text-sm hover:gap-3 transition-all">Cotizar agente IA →</a>
-                <a href="andres-zenithcode.html" class="inline-flex items-center gap-2 text-white/50 font-mono text-sm hover:text-white transition-all">Abrir chat →</a>
+                <a href="andres-zenithcode.html" class="zenith-hidden inline-flex items-center gap-2 text-white/50 font-mono text-sm hover:text-white transition-all">Abrir chat →</a>
               </div>
             </div>
             <div class="rounded-2xl border border-neon/20 bg-black/50 p-4">
@@ -1505,7 +1506,7 @@
           <p class="font-mono text-xs uppercase tracking-wider text-dimmer">Sitio</p>
           <ul class="mt-5 space-y-3 text-sm">
             <li><a href="#servicios" class="text-dim hover:text-white transition">Servicios</a></li>
-            <li><a href="andres-zenithcode.html" class="text-dim hover:text-white transition">Agente IA</a></li>
+            <li><a href="andres-zenithcode.html" class="zenith-hidden text-dim hover:text-white transition">Agente IA</a></li>
             <li><a href="#resultados" class="text-dim hover:text-white transition">Portafolio</a></li>
             <li><a href="#blog" class="text-dim hover:text-white transition">Blog</a></li>
             <li><a href="#cotizador" class="text-dim hover:text-white transition">Cotizador</a></li>
@@ -1523,7 +1524,7 @@
   <!-- ============== STICKY CHAT AND WHATSAPP ============== -->
   <a href="andres-zenithcode.html"
      aria-label="Chatear con Andres, agente IA"
-     class="fixed bottom-24 right-5 z-50 w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform border border-neon/40"
+     class="zenith-hidden fixed bottom-24 right-5 z-50 w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform border border-neon/40"
      style="box-shadow: 0 0 0 1px rgba(245,166,35,0.35), 0 10px 40px -10px rgba(245,166,35,0.55);">
     <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7" aria-hidden="true">
       <path d="M12 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -1546,140 +1547,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M19.05 4.91A10 10 0 0 0 12 2C6.48 2 2 6.48 2 12c0 1.76.46 3.45 1.34 4.95L2 22l5.18-1.36A10 10 0 0 0 12 22c5.52 0 10-4.48 10-10a9.97 9.97 0 0 0-2.95-7.09zM12 20.13c-1.55 0-3.07-.42-4.4-1.2l-.31-.18-3.07.81.82-3-.2-.32A8.13 8.13 0 1 1 20.13 12c0 4.49-3.64 8.13-8.13 8.13zm4.7-6.1c-.26-.13-1.52-.75-1.76-.83-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.27-1.51-1.42-1.77-.15-.26-.02-.4.11-.53.11-.11.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.41-.8-1.93-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.45.06-.69.32-.24.26-.9.88-.9 2.15s.92 2.49 1.05 2.66c.13.17 1.82 2.78 4.41 3.9.62.27 1.1.43 1.47.55.62.2 1.18.17 1.62.1.5-.07 1.52-.62 1.74-1.22.21-.6.21-1.11.15-1.22-.06-.11-.24-.17-.5-.3z"/></svg>
   </a>
 
-  <script>
-    // ── Zenith Safe-Code Protocol · XSS Defense Layer ──────────────────────────
-    // Escapa los 6 caracteres HTML peligrosos antes de insertar cualquier
-    // dato en el DOM. Usar siempre sobre input del usuario o datos externos.
-    function sanitize(str) {
-      return String(str).replace(/[&<>"'`]/g, function(c) {
-        return { '&':'&amp;', '<':'&lt;', '>':'&gt;',
-                 '"':'&quot;', "'":'&#x27;', '`':'&#x60;' }[c];
-      });
-    }
-    // Crea un elemento con texto seguro (nunca usa innerHTML)
-    function safeEl(tag, className, textContent) {
-      const el = document.createElement(tag);
-      if (className)   el.className   = className;
-      if (textContent !== undefined) el.textContent = textContent;
-      return el;
-    }
-    // ───────────────────────────────────────────────────────────────────────────
-
-    // Progressive enhancement reveal: only "arm" elements that are below the fold;
-    // anything in/above viewport stays visible. Animations fire on scroll-in.
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
-    function armReveals(){
-      if (reduceMotion) return;
-      document.querySelectorAll('.reveal:not(.in):not(.armed)').forEach(el=>{
-        const rect = el.getBoundingClientRect();
-        if (rect.top >= window.innerHeight * 0.95) { el.classList.add('armed'); io.observe(el); }
-      });
-    }
-    armReveals();
-    window.addEventListener('load', armReveals);
-    setTimeout(()=>document.querySelectorAll('.reveal.armed:not(.in)').forEach(el=>el.classList.add('in')), 1200);
-
-    // Counter animation
-    const counters = document.querySelectorAll('[data-count]');
-    const cIO = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(!e.isIntersecting) return;
-        const el = e.target;
-        const target = parseFloat(el.dataset.count);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-        const dur = 1200; const start = performance.now();
-        function tick(t){
-          const p = Math.min(1, (t-start)/dur);
-          const eased = 1 - Math.pow(1-p, 3);
-          el.textContent = prefix + Math.round(target*eased).toLocaleString('es-MX') + suffix;
-          if(p<1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-        cIO.unobserve(el);
-      });
-    }, { threshold: 0.4 });
-    counters.forEach(c=>cIO.observe(c));
-
-    // Calculadora de pérdidas
-    const visitas = document.getElementById('visitas');
-    const ticket  = document.getElementById('ticket');
-    const conv    = document.getElementById('conv');
-    const visLabel = document.getElementById('visLabel');
-    const tickLabel = document.getElementById('tickLabel');
-    const convLabel = document.getElementById('convLabel');
-    const perdida = document.getElementById('perdida');
-    const ventasHoy = document.getElementById('ventasHoy');
-    const ventasZenith = document.getElementById('ventasZenith');
-    const fmt = (n)=> '$' + Math.round(n).toLocaleString('es-MX');
-
-    function calc(){
-      const v = +visitas.value, t = +ticket.value, c = +conv.value;
-      visLabel.textContent = (+v).toLocaleString('es-MX');
-      tickLabel.textContent = '$' + (+t).toLocaleString('es-MX');
-      convLabel.textContent = c.toFixed(1) + '%';
-      const hoy = v * t * (c/100);
-      const zenith = v * t * Math.min((c*3)/100, 0.12);
-      ventasHoy.textContent = fmt(hoy);
-      ventasZenith.textContent = fmt(zenith);
-      perdida.textContent = fmt(Math.max(0, zenith - hoy));
-    }
-    [visitas, ticket, conv].forEach(el=> el.addEventListener('input', calc));
-    calc();
-
-    // Cotizador
-    const PRICES = {
-      landing:     { basico: 4900,  estandar: 8900,  premium: 14900, label: 'Landing Page' },
-      qr:          { basico: 2900,  estandar: 4900,  premium: 7900,  label: 'Menú QR' },
-      corporativa: { basico: 8900,  estandar: 15900, premium: 24000, label: 'Página Corporativa' },
-      auto:        { basico: 3500,  estandar: 9000,  premium: 18000, label: 'Automatización' },
-      ai:          { basico: 6900,  estandar: 14000, premium: 28000, label: 'Agente IA' },
-    };
-    const TAM_LABEL = { basico:'Básico', estandar:'Estándar', premium:'Premium' };
-    const EXTRA_LABEL = { seo:'SEO técnico', copy:'Copywriting', hosting:'Hosting 1 año', wabi:'WhatsApp Business', dominio:'Dominio .com', analytics:'Analítica avanzada' };
-
-    function getSelected(name){ return document.querySelector('input[name="'+name+'"]:checked')?.value; }
-    function getExtras(){
-      return [...document.querySelectorAll('input[name="extra"]:checked')].map(i=>({ key:i.value, price:+i.dataset.price }));
-    }
-
-    function recalc(){
-      const s = getSelected('servicio');
-      const t = getSelected('tamano');
-      const extras = getExtras();
-      const base = PRICES[s][t];
-      const extrasTotal = extras.reduce((a,e)=>a+e.price,0);
-      const total = base + extrasTotal;
-      document.getElementById('precioOut').textContent = '$' + total.toLocaleString('es-MX');
-
-      // ── Safe DOM — sin innerHTML para evitar XSS ──
-      const resumen = document.getElementById('resumenOut');
-      resumen.innerHTML = '';
-      try {
-        [
-          ['Servicio', PRICES[s].label],
-          ['Tamaño',   TAM_LABEL[t]],
-          ['Extras',   extras.length ? extras.map(function(e){ return EXTRA_LABEL[e.key]; }).join(', ') : 'Ninguno']
-        ].forEach(function(pair) {
-          const row = document.createElement('div');
-          row.className = 'flex justify-between';
-          row.appendChild(safeEl('span', 'text-dim', pair[0]));
-          row.appendChild(safeEl('span', null, pair[1]));
-          resumen.appendChild(row);
-        });
-      } catch(err) {
-        resumen.appendChild(safeEl('span', 'text-dim', 'Error al calcular resumen.'));
-      }
-
-      const msg = 'Hola Zenith Code, quiero cotizar:%0A• Servicio: '+PRICES[s].label+'%0A• Tamaño: '+TAM_LABEL[t]+'%0A• Extras: '+(extras.length ? extras.map(e=>EXTRA_LABEL[e.key]).join(', ') : 'Ninguno')+'%0A• Estimado: $'+total.toLocaleString('es-MX')+' MXN';
-      document.getElementById('cotizarBtn').href = 'https://wa.me/524791527895?text='+msg;
-    }
-    document.querySelectorAll('#servicioGroup input, #tamanoGroup input, #extrasGroup input').forEach(i=> i.addEventListener('change', recalc));
-    recalc();
-  </script>
 
   <!-- ============== TERMINAL MODAL ============== -->
   <div id="terminal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
@@ -1701,386 +1568,9 @@
     </div>
   </div>
 
-  <!-- ============== EXTRAS JS (menu / scrollbar / audit / terminal) ============== -->
-  <script>
-    // Scroll progress bar
-    const scrollbar = document.getElementById('scrollbar');
-    function updateScrollbar(){
-      const h = document.documentElement;
-      const sc = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
-      scrollbar.style.transform = 'scaleX(' + sc + ')';
-    }
-    updateScrollbar();
-    window.addEventListener('scroll', updateScrollbar, { passive:true });
 
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const menuClose = document.getElementById('menuClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    function openMenu(){ mobileMenu.classList.remove('hidden'); mobileMenu.classList.add('flex'); document.body.classList.add('menu-open'); }
-    function closeMenu(){ mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); document.body.classList.remove('menu-open'); }
-    menuBtn?.addEventListener('click', openMenu);
-    menuClose?.addEventListener('click', closeMenu);
-    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-    // ============== Diagnóstico interactivo ==============
-    const DIAG_QUESTIONS = [
-      {
-        q: '¿Tu sitio tarda más de 3 segundos en cargar en celular?',
-        sub: 'El 53% de los visitantes móviles abandona si tarda más de 3 segundos.',
-        badIfYes: true,
-        issue: 'Velocidad crítica — estás perdiendo más de la mitad de tus visitantes móviles antes de que vean tu negocio.',
-        sev: 'error'
-      },
-      {
-        q: '¿Tu sitio se ve bien y es fácil de usar en celular?',
-        sub: 'El 75% de tus clientes en el Bajío te buscan desde su teléfono.',
-        badIfYes: false,
-        issue: 'Sin diseño mobile-first — 3 de cada 4 visitantes tienen una experiencia mala y se van a la competencia.',
-        sev: 'error'
-      },
-      {
-        q: '¿Tu sitio tiene botón de WhatsApp o formulario de contacto visible?',
-        sub: 'El cliente que no puede contactarte fácil en 10 segundos se va.',
-        badIfYes: false,
-        issue: 'Sin llamada a la acción clara — los visitantes no saben cómo contactarte y se van sin dejar sus datos.',
-        sev: 'error'
-      },
-      {
-        q: '¿Tu negocio aparece en Google cuando alguien busca tu giro en tu ciudad?',
-        sub: 'El SEO local es la diferencia entre ser encontrado o ser invisible.',
-        badIfYes: false,
-        issue: 'Invisible en Google — tu competencia aparece primero y tú no existes para clientes que no te conocen aún.',
-        sev: 'error'
-      },
-      {
-        q: '¿Tu sitio fue hecho hace más de 2 años y no lo has actualizado?',
-        sub: 'Google penaliza los sitios desactualizados y los usuarios los perciben como poco confiables.',
-        badIfYes: true,
-        issue: 'Sitio obsoleto — Google lo penaliza en rankings y los clientes perciben tu negocio como poco profesional.',
-        sev: 'warn'
-      },
-      {
-        q: '¿Tu sitio fue hecho en WordPress con muchos plugins instalados?',
-        sub: 'Cada plugin extra puede costar 1–3 segundos de carga adicional.',
-        badIfYes: true,
-        issue: 'Sobrecarga de plugins — cada plugin instalado ralentiza tu sitio y crea vulnerabilidades de seguridad.',
-        sev: 'warn'
-      }
-    ];
-
-    let diagStep = 0;
-    let diagIssues = [];
-    let diagScore = 0; // score de salud (0 = todo mal, 6 = todo bien)
-
-    function diagLoad(idx){
-      const q = DIAG_QUESTIONS[idx];
-      document.getElementById('diagQNum').textContent = idx + 1;
-      const pct = Math.round((idx / 6) * 100);
-      document.getElementById('diagPct').textContent = pct + '%';
-      document.getElementById('diagProgress').style.width = pct + '%';
-      const card = document.getElementById('diagCard');
-      card.style.opacity = '0'; card.style.transform = 'translateY(10px)';
-      setTimeout(()=>{
-        document.getElementById('diagQuestion').textContent = q.q;
-        document.getElementById('diagSubtext').textContent = q.sub;
-        card.style.transition = 'opacity .35s ease, transform .35s ease';
-        card.style.opacity = '1'; card.style.transform = 'none';
-      }, 180);
-    }
-
-    function diagAnswer(yes){
-      const q = DIAG_QUESTIONS[diagStep];
-      const isBad = (q.badIfYes && yes) || (!q.badIfYes && !yes);
-      if (!isBad) diagScore++;
-      else diagIssues.push({ text: q.issue, sev: q.sev });
-      diagStep++;
-      if (diagStep < 6) {
-        diagLoad(diagStep);
-      } else {
-        diagShowResult();
-      }
-    }
-
-    function diagShowResult(){
-      document.getElementById('diagProgress').style.width = '100%';
-      document.getElementById('diagPct').textContent = '100%';
-      document.getElementById('diagQuiz').classList.add('hidden');
-      const resultEl = document.getElementById('diagResult');
-      resultEl.classList.remove('hidden');
-
-      const pct = Math.round((diagScore / 6) * 100);
-      const ring = document.getElementById('diagRingEl');
-      const ringLen = 138.2;
-      setTimeout(()=>{ ring.style.strokeDashoffset = (ringLen * (1 - pct/100)).toFixed(2); }, 100);
-      document.getElementById('diagScoreNum').textContent = pct;
-
-      const box = document.getElementById('diagResultBox');
-      let title, sub, desc, borderColor, ringColor;
-
-      if (diagScore <= 1) {
-        borderColor = '#ff3838'; ringColor = '#ff3838';
-        title = 'Situación crítica — estás perdiendo muchos clientes';
-        sub = 'Tu sitio tiene ' + diagIssues.length + ' problema' + (diagIssues.length !== 1 ? 's' : '') + ' serio' + (diagIssues.length !== 1 ? 's' : '');
-        desc = 'Con base en tus respuestas, tu sitio actual probablemente está bloqueando entre el 60% y el 80% de tus visitantes antes de que te contacten. Cada día sin arreglarlo es dinero que le das a tu competencia.';
-      } else if (diagScore <= 3) {
-        borderColor = '#ffb800'; ringColor = '#ffb800';
-        title = 'Hay margen de mejora importante';
-        sub = 'Tu sitio tiene ' + diagIssues.length + ' área' + (diagIssues.length !== 1 ? 's' : '') + ' que mejorar';
-        desc = 'Tu sitio no está en el peor estado, pero tiene puntos débiles que te están costando clientes cada semana. Resolverlos puede aumentar tu conversión entre un 30% y 50% en los próximos 30 días.';
-      } else {
-        borderColor = '#F5A623'; ringColor = '#F5A623';
-        title = 'Buen estado — pero siempre hay más que ganar';
-        sub = diagIssues.length > 0 ? ('Detectamos ' + diagIssues.length + ' punto' + (diagIssues.length !== 1 ? 's' : '') + ' de mejora') : 'Tu sitio pasa el diagnóstico básico';
-        desc = 'Tu sitio tiene una base sólida. Con optimizaciones finas en velocidad, copy y automatización podemos llevar tu conversión a un nivel superior.';
-      }
-
-      box.style.borderColor = borderColor;
-      ring.style.stroke = ringColor;
-      document.getElementById('diagResultTitle').textContent = title;
-      document.getElementById('diagResultSub').textContent = sub;
-      document.getElementById('diagResultDesc').textContent = desc;
-
-      const ul = document.getElementById('diagIssuesList');
-      ul.innerHTML = '';
-      diagIssues.forEach(function(issue, i) {
-        try {
-          if (!issue || typeof issue.text !== 'string') return;
-          const li = document.createElement('li');
-          li.className = 'flex items-start gap-3';
-          li.style.cssText = 'opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease';
-          // ── Safe DOM — textContent en lugar de innerHTML ──
-          const icon = safeEl('span', 'font-mono text-xs mt-0.5 shrink-0', '✕');
-          icon.style.color = issue.sev === 'error' ? '#ff3838' : '#ffb800';
-          const txt = safeEl('span', 'text-dim', issue.text);
-          li.appendChild(icon);
-          li.appendChild(txt);
-          ul.appendChild(li);
-          setTimeout(function(){ li.style.opacity='1'; li.style.transform='none'; }, 200 + i * 150);
-        } catch(err) { /* entrada malformada — se omite silenciosamente */ }
-      });
-
-      const waMsg = 'Hola Zenith Code, hice el diagnóstico de mi sitio web y obtuvo ' + pct + '% de salud. Tengo estos problemas: ' + (diagIssues.length ? diagIssues.map(i=>i.text.split('—')[0].trim()).join('; ') : 'ninguno crítico') + '. Quiero mejorarlo.';
-      document.getElementById('diagCtaBtn').href = 'https://wa.me/524791527895?text=' + encodeURIComponent(waMsg);
-
-      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function diagReset(){
-      diagStep = 0; diagIssues = []; diagScore = 0;
-      document.getElementById('diagResult').classList.add('hidden');
-      document.getElementById('diagQuiz').classList.remove('hidden');
-      document.getElementById('diagProgress').style.width = '0%';
-      document.getElementById('diagPct').textContent = '0%';
-      document.getElementById('diagRingEl').style.strokeDashoffset = '138.2';
-      diagLoad(0);
-    }
-
-    // Init quiz
-    diagLoad(0);
-
-    // ── Zenith Safe-Code: sin onclick inline — CSP compatible ──────────────
-    document.getElementById('diagBtnSi')   ?.addEventListener('click', function(){ diagAnswer(true);  });
-    document.getElementById('diagBtnNo')   ?.addEventListener('click', function(){ diagAnswer(false); });
-    document.getElementById('diagBtnReset')?.addEventListener('click', function(){ diagReset();        });
-    // ────────────────────────────────────────────────────────────────────────
-
-    // ============== Terminal ==============
-    const term = document.getElementById('terminal');
-    const termInput = document.getElementById('termInput');
-    const termBody = document.getElementById('termBody');
-    const termOut = termBody.querySelector('.term-out');
-    const logoBtn = document.getElementById('logoBtn');
-    const termClose = document.getElementById('termClose');
-
-    const BANNER =
-      '   ╔══════════════════════════════════════╗\n' +
-      '   ║   ZENITH CODE · v1.0  ·  León, Gto.      ║\n' +
-      '   ║   "Código que vende."                ║\n' +
-      '   ╚══════════════════════════════════════╝\n' +
-      '\n' +
-      'Bienvenido a la terminal interactiva. Escribe `help` para ver los comandos.\n';
-
-    function termPrint(text, cls){
-      const div = document.createElement('div');
-      if (cls) div.className = cls;
-      div.textContent = text;
-      termOut.appendChild(div);
-      termBody.scrollTop = termBody.scrollHeight;
-    }
-    function termHTML(html){
-      const div = document.createElement('div');
-      div.innerHTML = html;
-      termOut.appendChild(div);
-      termBody.scrollTop = termBody.scrollHeight;
-    }
-
-    function openTerm(){
-      term.classList.remove('hidden');
-      term.classList.add('flex');
-      document.body.classList.add('menu-open');
-      if (!termOut.dataset.booted) {
-        termPrint(BANNER, 'text-neon');
-        termOut.dataset.booted = '1';
-      }
-      setTimeout(()=>termInput.focus(), 50);
-    }
-    function closeTerm(){ term.classList.add('hidden'); term.classList.remove('flex'); document.body.classList.remove('menu-open'); }
-
-    logoBtn?.addEventListener('click', openTerm);
-    termClose?.addEventListener('click', closeTerm);
-
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape') { closeTerm(); closeMenu(); }
-      // ` or ~ opens terminal (but not if user is typing in another input)
-      if ((e.key === '`' || e.key === '~') && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
-        e.preventDefault(); openTerm();
-      }
-    });
-
-    const COMMANDS = {
-      help: () => termHTML(
-        '<div class="text-dim mb-2">Comandos disponibles:</div>' +
-        '<div class="grid grid-cols-2 gap-x-6 text-dim">' +
-          '<div><span class="text-neon">help</span> — esta ayuda</div>' +
-          '<div><span class="text-neon">servicios</span> — qué hacemos</div>' +
-          '<div><span class="text-neon">precios</span> — desde cuánto</div>' +
-          '<div><span class="text-neon">portafolio</span> — nuestros proyectos</div>' +
-          '<div><span class="text-neon">contacto</span> — cómo escribirnos</div>' +
-          '<div><span class="text-neon">whoami</span> — quiénes somos</div>' +
-          '<div><span class="text-neon">stack</span> — con qué construimos</div>' +
-          '<div><span class="text-neon">tiempo</span> — en cuánto entregamos</div>' +
-          '<div><span class="text-neon">garantia</span> — qué te garantizamos</div>' +
-          '<div><span class="text-neon">vende</span> — secreto de la marca</div>' +
-          '<div><span class="text-neon">sudo</span> — pruébalo 😉</div>' +
-          '<div><span class="text-neon">clear</span> — limpiar pantalla</div>' +
-          '<div><span class="text-neon">exit</span> — cerrar terminal</div>' +
-        '</div>'),
-      servicios: () => termPrint(
-        '→ Sitios web rápidos (one-page y multipágina)\n' +
-        '→ Tiendas en línea (e-commerce)\n' +
-        '→ Páginas corporativas con SEO técnico\n' +
-        '→ Automatización: WhatsApp, leads, CRMs, facturación\n' +
-        '→ Agentes IA: chat web, WhatsApp y calificación de leads\n', 'text-dim'),
-      portafolio: () => termHTML(
-        '<div class="text-dim mb-2">Demos por industria:</div>' +
-        '<div class="space-y-1 text-dim">' +
-          '<div>→ <a class="text-neon underline" target="_blank" href="https://blackgloss.myzenith.space">Landing para estética automotriz</a> — Estética automotriz premium · Demo conceptual</div>' +
-          '<div>→ <a class="text-neon underline" target="_blank" href="https://daynamex.myzenith.space">Portal B2B para manufactura</a> — Convertidores catalíticos B2B · Demo conceptual</div>' +
-          '<div>→ <a class="text-neon underline" target="_blank" href="https://motor.myzenith.space">Sitio para detailing</a> — Detailing automotriz · Industria local</div>' +
-          '<div>→ <a class="text-neon underline" target="_blank" href="https://galexx-mx.myzenith.space">E-commerce streetwear</a> — Streetwear caps · Demo conceptual</div>' +
-          '<div>→ Landing detailing premium — Detailing premium · Industria local</div>' +
-          '<div>→ Landing inmobiliaria — Bienes raíces · Industria local</div>' +
-          '<div>→ Menú QR para restaurante — Menú QR · Industria local</div>' +
-          '<div>→ Landing para consultorio — Landing + Automatización · Salud y bienestar</div>' +
-          '<div>→ Sitio para refaccionaria — Página corporativa · Automotriz</div>' +
-        '</div>'),
-      precios: () => termPrint(
-        'Sitios one-page    desde $4,900 MXN\n' +
-        'Tiendas en línea   desde $12,900 MXN\n' +
-        'Corporativas       desde $8,900 MXN\n' +
-        'Automatizaciones   desde $3,500 MXN\n' +
-        'Agentes IA         desde $6,900 MXN\n\n' +
-        'Cotización exacta en < 1h por WhatsApp.', 'text-dim'),
-      contacto: () => termHTML(
-        '<div class="text-dim">WhatsApp: <a class="text-neon underline" target="_blank" href="https://wa.me/524791527895">+52 479 152 7895</a></div>' +
-        '<div class="text-dim">Email: <a class="text-neon underline" href="mailto:zenithcode.leon@gmail.com">zenithcode.leon@gmail.com</a></div>' +
-        '<div class="text-dim">Ubicación: León, Guanajuato — servimos a todo México</div>'),
-      whoami: () => termPrint(
-        'Zenith Code · agencia de desarrollo web y automatización\n' +
-        'Sede: León, Gto. · Servimos a todo el Bajío y México\n' +
-        'Especialidad: sitios rápidos, claros y orientados a conversión.', 'text-dim'),
-      stack: () => termPrint(
-        'Frontend:   HTML, CSS, JS, React, Next.js, Astro\n' +
-        'Backend:    Node, Python, PostgreSQL\n' +
-        'Hosting:    Vercel, Cloudflare, AWS\n' +
-        'Automatiz.: n8n, Make, Zapier, APIs propias\n', 'text-dim'),
-      tiempo: () => termPrint('Sitio one-page en 7–14 días · proyectos completos en menos de 21 días.', 'text-dim'),
-      garantia: () => termPrint(
-        '✓ 30 días de soporte incluidos\n' +
-        '✓ Reembolso si no cumplimos plazo\n' +
-        '✓ Tu eres dueño 100% del código\n' +
-        '✓ Sin permanencias ni mensualidades obligatorias', 'text-dim'),
-      vende: () => termPrint('// Velocidad + claridad + un solo CTA = más ventas. Lo demás es ruido.', 'text-neon'),
-      sudo: () => termPrint('jajaja no, aquí no necesitamos sudo. Pero te ganaste un descuento simbólico de buena onda. Menciónalo al cotizar 😉', 'text-neon'),
-      ls: () => termPrint('servicios/  resultados/  cotizador.exe  garantias.txt  contacto.md', 'text-dim'),
-      cat: () => termPrint('cat: especifica un archivo. Prueba: `servicios`, `precios`, `garantia`.', 'text-dim'),
-      rm: () => termPrint('rm: bonito intento. Aquí nada se borra: solo se construye.', 'text-dim'),
-      exit: () => closeTerm(),
-      clear: () => { termOut.innerHTML = ''; }
-    };
-
-    termInput?.addEventListener('keydown', function(e) {
-      if (e.key !== 'Enter') return;
-      try {
-        const raw = termInput.value;
-        // Validación: longitud máxima para prevenir DoS en el DOM
-        if (!raw || raw.length > 500) { termInput.value = ''; return; }
-        const cmd = raw.trim().toLowerCase().split(/\s+/)[0];
-        // ── Safe DOM: construimos el eco del prompt sin innerHTML ──
-        const echo = document.createElement('div');
-        [
-          { cls: 'text-neon',  text: 'zenith@bajio' },
-          { cls: 'text-dim',   text: ':'             },
-          { cls: 'text-white', text: '~'             },
-          { cls: 'text-dim',   text: '$ '            },
-          { cls: 'text-white', text: raw             }
-        ].forEach(function(p) {
-          echo.appendChild(safeEl('span', p.cls, p.text));
-        });
-        termOut.appendChild(echo);
-        termInput.value = '';
-        if (!cmd) { termBody.scrollTop = termBody.scrollHeight; return; }
-        const fn = COMMANDS[cmd];
-        if (fn) {
-          fn();
-        } else {
-          termPrint("comando no reconocido: '" + sanitize(cmd) + "' — escribe `help`", 'text-[#ff3838]');
-        }
-        termBody.scrollTop = termBody.scrollHeight;
-      } catch(err) {
-        termPrint('Error interno. Recarga la página si el problema persiste.', 'text-[#ff3838]');
-      }
-    });
-  </script>
-
-  <script>
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm){
-      contactForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const name = document.getElementById('contactName').value;
-        const email = document.getElementById('contactEmail').value;
-        const type = document.getElementById('contactType').value;
-        const msg = document.getElementById('contactMsg').value;
-        const text = `Hola Zenith Code, soy ${name} (${email}).%0A%0ATipo de proyecto: ${type}%0A%0A${msg}`;
-        window.open('https://wa.me/524791527895?text=' + encodeURIComponent(text.replace(/%0A/g, '\n')), '_blank');
-        document.getElementById('contactSubmit').classList.add('hidden');
-        document.getElementById('contactSuccess').classList.remove('hidden');
-      });
-    }
-
-    const toggleBtn = document.getElementById('toggleCases');
-    const toggleText = document.getElementById('toggleCasesText');
-    const toggleIcon = document.getElementById('toggleCasesIcon');
-    const extraCases = [document.getElementById('extraCase1'), document.getElementById('extraCase2'), document.getElementById('extraCase3')];
-    let casesExpanded = false;
-    if(toggleBtn){
-      toggleBtn.addEventListener('click', ()=>{
-        casesExpanded = !casesExpanded;
-        extraCases.forEach(el => { if(el) el.classList.toggle('hidden'); });
-        toggleText.textContent = casesExpanded ? 'Ver menos' : 'Ver más demos';
-        toggleIcon.style.transform = casesExpanded ? 'rotate(180deg)' : '';
-      });
-    }
-
-    // Mes actual en barra de urgencia — se actualiza solo cada mes
-    (function(){
-      var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-      var el = document.getElementById('mesCupo');
-      if (el) el.textContent = meses[new Date().getMonth()];
-    })();
-  </script>
+  <script src="/assets/zc.guard.js" defer></script>
+  <script src="/assets/zc.app.js" defer></script>
 </body>
   </html>
   
