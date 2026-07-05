@@ -221,7 +221,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -229,19 +229,24 @@
       theme: {
         extend: {
           colors: {
-            neon: '#F5A623',
-            'neon-dim': '#D4891A',
+            neon: '#FFFFFF',
+            'neon-dim': '#A8A8AD',
             ink: '#000000',
-            panel: '#0A0A0A',
-            panel2: '#111111',
-            line: '#1F1F1F',
+            panel: 'rgba(255,255,255,0.04)',
+            panel2: 'rgba(255,255,255,0.06)',
+            line: 'rgba(255,255,255,0.10)',
             dim: '#9CA3AF',
             dimmer: '#6B7280',
+            glass: 'rgba(255,255,255,0.06)',
+            'glass-border': 'rgba(255,255,255,0.12)',
           },
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Inter', '-apple-system', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          backdropBlur: {
+            glass: '24px',
           },
         }
       }
@@ -251,97 +256,245 @@
   <style>
     .zenith-hidden { display: none !important; visibility: hidden !important; pointer-events: none !important; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { background:#000; color:#fff; font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-    ::selection { background:#F5A623; color:#000; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: rgba(255,255,255,0.9); color: #000; }
+
+    /* ── Spatial ambient layer ── */
+    .spatial-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,255,255,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 35% at 0% 80%, rgba(255,255,255,0.04) 0%, transparent 45%),
+        #000;
+    }
+    .spatial-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: float-orb 18s ease-in-out infinite;
+    }
+    .spatial-orb--1 { width: 520px; height: 520px; top: -8%; right: -6%; background: rgba(255,255,255,0.06); }
+    .spatial-orb--2 { width: 380px; height: 380px; bottom: 10%; left: -8%; background: rgba(255,255,255,0.04); animation-delay: -6s; }
+    .spatial-orb--3 { width: 280px; height: 280px; top: 42%; left: 38%; background: rgba(255,255,255,0.03); animation-delay: -12s; }
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(24px, -18px) scale(1.04); }
+      66% { transform: translate(-16px, 12px) scale(0.97); }
+    }
+
+    .page-shell { position: relative; z-index: 1; }
 
     .container-x { width:100%; max-width:1200px; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
     @media (min-width: 768px){ .container-x{ padding-left:2rem; padding-right:2rem; } }
 
+    /* ── Liquid glass surfaces ── */
+    .glass {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 8px 32px rgba(0,0,0,0.35);
+    }
+    .glass-strong {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 16px 48px rgba(0,0,0,0.45);
+    }
+    .glass-pill {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+    }
+
     .grid-bg{
       background-image:
-        linear-gradient(rgba(245,166,35,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(245,166,35,0.05) 1px, transparent 1px);
-      background-size: 56px 56px;
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
     }
 
     .reveal { opacity:1; transform:none; transition: opacity .7s ease, transform .7s ease; }
     .reveal.armed:not(.in) { opacity:0; transform: translateY(24px); }
-    @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1 !important; transform:none !important; transition:none !important; } }
+    @media (prefers-reduced-motion: reduce){
+      .reveal, .spatial-orb { opacity:1 !important; transform:none !important; transition:none !important; animation:none !important; }
+    }
 
     /* Mobile menu links */
-    .menu-link { display:flex; align-items:center; gap:1rem; padding:1rem .25rem; border-bottom:1px solid #1F1F1F; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.35rem; color:#fff; transition: padding .2s ease, color .2s ease; }
-    .menu-link:hover { padding-left:1rem; color:#F5A623; }
+    .menu-link {
+      display:flex; align-items:center; gap:1rem; padding:1rem .25rem;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      font-family:'Outfit',sans-serif; font-weight:500; font-size:1.35rem; color:#fff;
+      transition: padding .2s ease, color .2s ease;
+    }
+    .menu-link:hover { padding-left:1rem; color:#fff; }
     .menu-link .num { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:#6B7280; letter-spacing:.1em; }
-    .menu-link .arr { margin-left:auto; font-family:'JetBrains Mono',monospace; color:#F5A623; opacity:.6; }
-    .menu-link:hover .arr { opacity:1; transform:translateX(4px); }
+    .menu-link .arr { margin-left:auto; font-family:'JetBrains Mono',monospace; color:rgba(255,255,255,0.5); opacity:.6; }
+    .menu-link:hover .arr { opacity:1; transform:translateX(4px); color:#fff; }
     body.menu-open { overflow:hidden; }
 
+    /* Month calendar widget */
+    .month-calendar { border-radius: 24px; padding: 1.5rem 1.75rem; max-width: 420px; }
+    .month-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+    @media (min-width: 480px) { .month-strip { grid-template-columns: repeat(12, 1fr); } }
+    .month-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 6px 2px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.28);
+      border: 1px solid transparent;
+      transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    .month-pill.is-current {
+      color: #000;
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(255,255,255,0.15);
+    }
+    .month-pill.is-past { color: rgba(255,255,255,0.18); }
+
     /* Audit progress bar */
-    .audit-bar { height:8px; background:#1F1F1F; border-radius:999px; overflow:hidden; }
-    .audit-bar > span { display:block; height:100%; background:#F5A623; width:0%; transition: width 1.2s cubic-bezier(.2,.7,.2,1); }
-    .audit-bar.bad > span { background:#ff3838; }
-    .audit-bar.mid > span { background:#ffb800; }
+    .audit-bar { height:8px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; }
+    .audit-bar > span { display:block; height:100%; background:#fff; width:0%; transition: width 1.2s cubic-bezier(.2,.7,.2,1); }
+    .audit-bar.bad > span { background:#ff4444; }
+    .audit-bar.mid > span { background:#c8c8c8; }
 
     /* Terminal */
     #terminal { font-family:'JetBrains Mono',monospace; }
     #terminal .term-out { white-space:pre-wrap; word-break:break-word; }
-    #terminal .cursor { display:inline-block; width:.55ch; background:#F5A623; animation: blink 1s steps(2) infinite; }
+    #terminal .cursor { display:inline-block; width:.55ch; background:#fff; animation: blink 1s steps(2) infinite; }
     @keyframes blink { 50% { opacity:0; } }
-    #terminal input { background:transparent; border:0; outline:none; color:#F5A623; font-family:inherit; font-size:inherit; width:100%; caret-color:#F5A623; }
+    #terminal input { background:transparent; border:0; outline:none; color:#fff; font-family:inherit; font-size:inherit; width:100%; caret-color:#fff; }
 
     .underline-neon{
-      background-image: linear-gradient(transparent 65%, #F5A623 65%, #F5A623 88%, transparent 88%);
+      background-image: linear-gradient(transparent 65%, rgba(255,255,255,0.35) 65%, rgba(255,255,255,0.35) 88%, transparent 88%);
       background-repeat:no-repeat; background-size:100% 100%;
       padding: 0 .12em;
     }
 
     details > summary { list-style:none; cursor:pointer; }
     details > summary::-webkit-details-marker { display:none; }
-    details[open] .chev { transform: rotate(45deg); color:#F5A623; }
+    details[open] .chev { transform: rotate(45deg); color:#fff; }
 
-    input[type="range"]{ -webkit-appearance:none; appearance:none; height:6px; background:#1F1F1F; border-radius:999px; outline:none; }
-    input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:24px; height:24px; border-radius:999px; background:#F5A623; cursor:pointer; box-shadow:0 0 0 4px rgba(245,166,35,0.15); }
-    input[type="range"]::-moz-range-thumb{ width:24px; height:24px; border-radius:999px; background:#F5A623; border:0; cursor:pointer; }
+    input[type="range"]{ -webkit-appearance:none; appearance:none; height:6px; background:rgba(255,255,255,0.10); border-radius:999px; outline:none; }
+    input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:999px; background:#fff; cursor:pointer; box-shadow:0 0 0 4px rgba(255,255,255,0.12); }
+    input[type="range"]::-moz-range-thumb{ width:22px; height:22px; border-radius:999px; background:#fff; border:0; cursor:pointer; }
 
-    .btn-primary{ background:#F5A623; color:#000; font-weight:700; letter-spacing:.02em; transition: transform .15s ease, box-shadow .2s ease, background .2s ease; }
-    .btn-primary:hover{ background:#FFB84D; box-shadow: 0 10px 40px -10px rgba(245,166,35,0.6); transform: translateY(-1px); }
-    .btn-ghost{ border:1px solid #2A2A2A; color:#fff; transition: border-color .2s ease, background .2s ease; }
-    .btn-ghost:hover{ border-color:#F5A623; background:rgba(245,166,35,0.04); }
+    .btn-primary{
+      background: rgba(255,255,255,0.92);
+      color: #000;
+      font-weight: 600;
+      letter-spacing: .02em;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-primary:hover{
+      background: #fff;
+      box-shadow: 0 12px 40px -8px rgba(255,255,255,0.35);
+      transform: translateY(-1px);
+    }
+    .btn-ghost{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .btn-ghost:hover{ border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); }
 
-    .card{ background:#0A0A0A; border:1px solid #1F1F1F; transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease; }
-    .card:hover{ border-color:#2E2E2E; transform:translateY(-2px); }
-    .card-hot:hover{ border-color:#F5A623; }
-    .card-case:hover{ border-color:rgba(245,166,35,0.3); box-shadow:0 0 30px -10px rgba(245,166,35,0.15); }
-    .card-case img{ filter:grayscale(40%) brightness(0.85); transition: filter .5s ease, transform .5s ease; }
-    .card-case:hover img{ filter:grayscale(0%) brightness(1); transform:scale(1.04); }
+    .card{
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .card:hover{
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .card-hot:hover{ border-color: rgba(255,255,255,0.28); }
+    .card-case:hover{ border-color: rgba(255,255,255,0.22); box-shadow: 0 0 40px -10px rgba(255,255,255,0.08); }
+    .card-case img{ filter: grayscale(30%) brightness(0.88); transition: filter .5s ease, transform .5s ease; }
+    .card-case:hover img{ filter: grayscale(0%) brightness(1); transform:scale(1.04); }
 
     .no-scrollbar::-webkit-scrollbar{ display:none; }
     .no-scrollbar{ scrollbar-width:none; }
 
-    .browser{ border:1px solid #1F1F1F; border-radius:14px; overflow:hidden; background:#0A0A0A; }
-    .browser .bar{ display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid #1F1F1F; background:#0E0E0E; }
-    .browser .dot{ width:10px; height:10px; border-radius:999px; background:#222; }
+    .browser{ border:1px solid rgba(255,255,255,0.10); border-radius:16px; overflow:hidden; background:rgba(255,255,255,0.03); backdrop-filter:blur(16px); }
+    .browser .bar{ display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.04); }
+    .browser .dot{ width:10px; height:10px; border-radius:999px; background:rgba(255,255,255,0.15); }
 
-    .opt-card{ position:relative; display:flex; flex-direction:column; gap:4px; padding:16px 18px; border:1px solid #1F1F1F; border-radius:12px; background:#0A0A0A; cursor:pointer; transition: border-color .2s ease, background .2s ease; }
+    .opt-card{
+      position:relative; display:flex; flex-direction:column; gap:4px;
+      padding:16px 18px; border:1px solid rgba(255,255,255,0.10); border-radius:14px;
+      background: rgba(255,255,255,0.03); backdrop-filter:blur(12px);
+      cursor:pointer; transition: border-color .2s ease, background .2s ease;
+    }
     .opt-card .title{ font-weight:600; }
     .opt-card .sub{ font-family:'JetBrains Mono', monospace; font-size:11px; color:#6B7280; }
     .opt-card input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
-    .opt-card:hover{ border-color:#2E2E2E; }
-    .opt-card:has(input:checked){ border-color:#F5A623; background:rgba(245,166,35,0.04); }
-    .opt-card:has(input:checked) .sub{ color:#F5A623; }
+    .opt-card:hover{ border-color: rgba(255,255,255,0.20); }
+    .opt-card:has(input:checked){ border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); }
+    .opt-card:has(input:checked) .sub{ color:#fff; }
     .opt-card.sm{ align-items:center; text-align:center; padding:14px 10px; }
 
     .ticker{ display:flex; gap:3rem; animation: ticker 30s linear infinite; }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* fix mobile 100vh */
     .min-h-svh{ min-height: 100svh; }
+    section[id]{ scroll-margin-top: 88px; }
 
-    /* offset anchor scrolls so the fixed nav doesn't cover headings */
-    section[id]{ scroll-margin-top: 80px; }
+    /* Spatial depth on section headings */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
   </style>
   </head>
   <body class="bg-black text-white">
+
+  <!-- Spatial ambient background -->
+  <div class="spatial-bg" aria-hidden="true">
+    <div class="spatial-orb spatial-orb--1"></div>
+    <div class="spatial-orb spatial-orb--2"></div>
+    <div class="spatial-orb spatial-orb--3"></div>
+  </div>
+
+  <div class="page-shell">
   
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNJ8CGD3"
@@ -349,37 +502,37 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- ============== ANUNCIO SUPERIOR ============== -->
-  <div class="bg-neon text-black text-center text-[12px] md:text-sm font-semibold py-2 px-4 tracking-wide">
-    Cupo limitado · solo 4 proyectos nuevos en <span id="mesCupo">junio</span> · respuesta en menos de 1h por WhatsApp
+  <div class="glass border-b border-white/[0.08] text-center text-[11px] md:text-xs font-medium py-2.5 px-4 tracking-wide text-white/70">
+    Cupo limitado · solo 4 proyectos nuevos en <span id="mesCupo" class="text-white font-semibold capitalize">julio</span> · respuesta en menos de 1h
   </div>
 
   <!-- ============== NAV ============== -->
   <!-- Scroll progress bar -->
-  <div id="scrollbar" class="fixed top-0 left-0 right-0 h-[2px] bg-neon z-[60]" style="transform-origin:left center; transform:scaleX(0); transition:transform .1s linear;"></div>
+  <div id="scrollbar" class="fixed top-0 left-0 right-0 h-[2px] bg-white/80 z-[60]" style="transform-origin:left center; transform:scaleX(0); transition:transform .1s linear;"></div>
 
-  <header class="sticky top-0 inset-x-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/[0.06]">
+  <header class="sticky top-0 inset-x-0 z-50 glass border-b border-white/[0.08]">
     <div class="container-x flex items-center justify-between h-16">
       <button id="logoBtn" type="button" title="Abrir terminal (atajo: tecla ~)" class="flex items-center gap-2 group cursor-pointer">
-        <span class="font-mono text-neon group-hover:animate-pulse">&gt;_</span>
-        <span class="font-display font-bold tracking-tight text-base">ZENITH CODE</span>
+        <span class="font-mono text-white/60 group-hover:text-white transition-colors">&gt;_</span>
+        <span class="font-display font-semibold tracking-tight text-base text-white/90">ZENITH CODE</span>
       </button>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-white/40">
+      <nav class="hidden md:flex items-center gap-8 text-sm text-white/35">
         <a href="#nosotros" class="hover:text-white transition">Nosotros</a>
         <a href="#servicios" class="hover:text-white transition">Servicios</a>
         <a href="andres-zenithcode.html" class="zenith-hidden hover:text-white transition">Agente IA</a>
         <a href="#resultados" class="hover:text-white transition">Demos</a>
         <a href="#blog" class="hover:text-white transition">Blog</a>
-        <a href="#contacto" class="hover:text-neon transition">Contacto</a>
+        <a href="#contacto" class="hover:text-white transition">Contacto</a>
         <a href="#cotizador" class="hover:text-white transition">Cotizador</a>
         <a href="#faq" class="hover:text-white transition">FAQ</a>
       </nav>
       <div class="flex items-center gap-2">
         <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto"
            target="_blank" rel="noopener noreferrer"
-           class="btn-primary inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-md text-[11px] sm:text-xs md:text-sm font-mono uppercase">
+           class="btn-primary inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs md:text-sm font-medium">
           Cotizar
         </a>
-        <button id="menuBtn" type="button" aria-label="Abrir menú" class="md:hidden w-10 h-10 flex items-center justify-center rounded-md border border-line text-white hover:border-neon transition">
+        <button id="menuBtn" type="button" aria-label="Abrir menú" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full glass-pill text-white hover:border-white/25 transition">
           <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
@@ -387,10 +540,10 @@
   </header>
 
   <!-- Mobile menu overlay -->
-  <div id="mobileMenu" class="fixed inset-0 z-[55] bg-black/95 backdrop-blur-md hidden flex-col">
+  <div id="mobileMenu" class="fixed inset-0 z-[55] bg-black/90 backdrop-blur-xl hidden flex-col">
     <div class="container-x flex items-center justify-between h-16 border-b border-white/[0.06]">
       <span class="font-mono text-xs text-dimmer uppercase tracking-widest">// menú</span>
-      <button id="menuClose" type="button" aria-label="Cerrar menú" class="w-10 h-10 flex items-center justify-center rounded-md border border-line text-white hover:border-neon transition">
+      <button id="menuClose" type="button" aria-label="Cerrar menú" class="w-10 h-10 flex items-center justify-center rounded-full glass-pill text-white hover:border-white/25 transition">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
@@ -402,7 +555,7 @@
       <a href="#blog" class="menu-link">Blog <span class="arr">→</span></a>
       <a href="#cotizador" class="menu-link">Cotizador <span class="arr">→</span></a>
       <a href="#faq" class="menu-link">FAQ <span class="arr">→</span></a>
-      <a href="#contacto" class="menu-link text-neon">Contacto <span class="arr">→</span></a>
+      <a href="#contacto" class="menu-link text-white">Contacto <span class="arr">→</span></a>
     </nav>
     <div class="container-x py-6 border-t border-white/[0.06] space-y-3">
       <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener noreferrer" class="btn-primary flex items-center justify-center gap-2 px-5 py-4 rounded-lg font-mono text-sm uppercase">
@@ -414,57 +567,61 @@
 
   <!-- ============== HERO ============== -->
   <section id="top" class="relative pt-20 pb-28 md:pt-32 md:pb-40 overflow-hidden">
-    <!-- bg image -->
-    <div class="absolute inset-0">
-      <img alt="Panorámica nocturna de León, Guanajuato, sede de Zenith Code" src="hero-bg.jpg" alt="" class="w-full h-full object-cover opacity-30" />
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-black"></div>
+    <div class="absolute inset-0 opacity-40">
+      <img alt="Panorámica nocturna de León, Guanajuato, sede de Zenith Code" src="hero-bg.jpg" class="w-full h-full object-cover opacity-20 grayscale" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black"></div>
     </div>
-    <div class="absolute -top-60 -right-60 w-[700px] h-[700px] rounded-full bg-white/[0.02] blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-neon/[0.03] blur-3xl"></div>
 
     <div class="container-x relative">
-      <div class="reveal inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur text-[12px] tracking-wide text-white/50">
+      <!-- Month calendar — auto-updates each month -->
+      <div class="reveal glass month-calendar mb-10" id="monthCalendar" aria-live="polite">
+        <p class="text-[11px] uppercase tracking-[0.22em] text-white/40 font-mono">Hoy estamos en</p>
+        <p class="mt-2 font-display font-semibold text-4xl md:text-5xl tracking-tight text-white capitalize" id="mesHero">julio</p>
+        <div class="month-strip mt-5" id="monthStrip" role="list" aria-label="Meses del año"></div>
+      </div>
+
+      <div class="reveal glass-pill inline-flex items-center gap-3 px-4 py-2 text-[12px] tracking-wide text-white/50">
         Agencia de desarrollo web · León, Guanajuato
       </div>
 
-      <h1 class="reveal mt-10 font-display font-bold tracking-tight text-[44px] leading-[1.08] sm:text-6xl md:text-7xl lg:text-[88px]">
-        Diseñamos sitios<br/>que <span class="text-neon">convierten.</span>
+      <h1 class="reveal mt-10 font-display font-semibold tracking-tight text-[44px] leading-[1.08] sm:text-6xl md:text-7xl lg:text-[84px] text-white/95">
+        Diseñamos sitios<br/>que <span class="text-white underline-neon">convierten.</span>
       </h1>
 
-      <p class="reveal mt-8 max-w-xl text-lg md:text-xl text-white/50 leading-relaxed font-light">
+      <p class="reveal mt-8 max-w-xl text-lg md:text-xl text-white/45 leading-relaxed font-light">
         Desarrollo web profesional para negocios que quieren crecer. Resultados medibles, código limpio, entrega en 21 días.
       </p>
 
       <div class="reveal mt-10 flex flex-col sm:flex-row gap-4">
         <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto"
            target="_blank" rel="noopener noreferrer"
-           class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-medium tracking-wide">
+           class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-sm font-medium tracking-wide">
           Cotizar proyecto →
         </a>
-        <a href="#resultados" class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg text-sm font-medium tracking-wide">
+        <a href="#resultados" class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-sm font-medium tracking-wide">
           Ver demos por industria
         </a>
       </div>
 
-      <p class="reveal mt-6 text-[11px] text-white/30 tracking-wide">
+      <p class="reveal mt-6 text-[11px] text-white/25 tracking-wide">
         Sin costo · Sin compromiso · Respuesta en menos de 1 hora
       </p>
 
-      <div class="reveal mt-24 md:mt-32 flex flex-wrap gap-12 md:gap-16">
-        <div>
-          <div class="font-display text-4xl md:text-5xl font-bold text-white">95+</div>
+      <div class="reveal mt-24 md:mt-32 grid grid-cols-2 md:flex md:flex-wrap gap-6 md:gap-16">
+        <div class="glass rounded-2xl p-5 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:backdrop-blur-none">
+          <div class="font-display text-3xl md:text-5xl font-semibold text-white">95+</div>
           <div class="mt-2 text-xs text-white/30 tracking-wide">PageSpeed garantizado</div>
         </div>
-        <div>
-          <div class="font-display text-4xl md:text-5xl font-bold text-white" data-count="40" data-prefix="+" data-suffix="%">+40%</div>
+        <div class="glass rounded-2xl p-5 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:backdrop-blur-none">
+          <div class="font-display text-3xl md:text-5xl font-semibold text-white" data-count="40" data-prefix="+" data-suffix="%">+40%</div>
           <div class="mt-2 text-xs text-white/30 tracking-wide">Conversión</div>
         </div>
-        <div>
-          <div class="font-display text-4xl md:text-5xl font-bold text-white">100%</div>
+        <div class="glass rounded-2xl p-5 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:backdrop-blur-none">
+          <div class="font-display text-3xl md:text-5xl font-semibold text-white">100%</div>
           <div class="mt-2 text-xs text-white/30 tracking-wide">Entregados a tiempo</div>
         </div>
-        <div>
-          <div class="font-display text-4xl md:text-5xl font-bold text-white" data-count="21">&lt;21</div>
+        <div class="glass rounded-2xl p-5 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:backdrop-blur-none">
+          <div class="font-display text-3xl md:text-5xl font-semibold text-white" data-count="21">&lt;21</div>
           <div class="mt-2 text-xs text-white/30 tracking-wide">Días de entrega</div>
         </div>
       </div>
@@ -472,7 +629,7 @@
   </section>
 
   <!-- ============== TICKER DEMOS ============== -->
-  <section class="border-y border-white/[0.06] bg-panel py-8 overflow-hidden">
+  <section class="border-y border-white/[0.06] glass py-8 overflow-hidden">
     <p class="text-center text-xs font-mono uppercase tracking-[0.25em] text-dimmer mb-5">Demos por industria disponibles para explorar</p>
     <div class="ticker whitespace-nowrap font-display font-semibold text-base md:text-lg text-dim">
       <div class="flex items-center gap-12 pr-12">
@@ -503,8 +660,8 @@
     <div class="container-x">
       <div class="max-w-3xl reveal">
         <p class="text-xs uppercase tracking-[0.3em] text-neon/70">El problema</p>
-        <h2 class="mt-4 font-display font-bold text-3xl md:text-5xl tracking-tight leading-[1.1]">
-          Si tu sitio tarda más de 3 segundos en cargar, <span class="underline-neon text-neon">ya perdiste al cliente.</span>
+        <h2 class="mt-4 font-display font-semibold text-3xl md:text-5xl tracking-tight leading-[1.1]">
+          Si tu sitio tarda más de 3 segundos en cargar, <span class="underline-neon text-white">ya perdiste al cliente.</span>
         </h2>
       </div>
       <div class="mt-14 grid md:grid-cols-3 gap-5">
@@ -643,7 +800,7 @@
                 </div>
                 <div class="p-4 space-y-3 text-sm">
                   <div class="max-w-[88%] rounded-2xl rounded-tl-sm bg-white/[0.06] border border-white/[0.08] p-3 text-dim">Hola, soy el agente de Zenith. ¿Buscas una landing, automatización o un chat IA?</div>
-                  <div class="ml-auto max-w-[82%] rounded-2xl rounded-tr-sm bg-neon text-black p-3 font-medium">Quiero que mi negocio responda aunque esté cerrado.</div>
+                  <div class="ml-auto max-w-[82%] rounded-2xl rounded-tr-sm bg-white text-black p-3 font-medium">Quiero que mi negocio responda aunque esté cerrado.</div>
                   <div class="max-w-[90%] rounded-2xl rounded-tl-sm bg-white/[0.06] border border-white/[0.08] p-3 text-dim">Perfecto. Te hago 3 preguntas y le paso el resumen al equipo por WhatsApp.</div>
                 </div>
               </div>
@@ -767,7 +924,7 @@
               <span class="font-display font-bold text-neon text-sm">Servicios automotrices</span>
               <span class="text-white/25 text-xs ml-2">Demo conceptual</span>
             </div>
-                  <a href="https://blackgloss.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-neon transition tracking-wide">Ver demo →</a>
+                  <a href="https://blackgloss.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-white transition tracking-wide">Ver demo →</a>
           </div>
         </article>
 
@@ -785,7 +942,7 @@
               <span class="font-display font-bold text-neon text-sm">Catálogo industrial</span>
               <span class="text-white/25 text-xs ml-2">Demo conceptual</span>
             </div>
-                  <a href="https://daynamex.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-neon transition tracking-wide">Ver demo →</a>
+                  <a href="https://daynamex.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-white transition tracking-wide">Ver demo →</a>
           </div>
         </article>
 
@@ -803,7 +960,7 @@
               <span class="font-display font-bold text-neon text-sm">Servicios premium</span>
               <span class="text-white/25 text-xs ml-2">Industria local</span>
             </div>
-                  <a href="https://motor.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-neon transition tracking-wide">Ver demo →</a>
+                  <a href="https://motor.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-white transition tracking-wide">Ver demo →</a>
           </div>
         </article>
 
@@ -821,7 +978,7 @@
               <span class="font-display font-bold text-neon text-sm">Tienda demo</span>
               <span class="text-white/25 text-xs ml-2">Demo conceptual</span>
             </div>
-                  <a href="https://galexx-mx.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-neon transition tracking-wide">Ver demo →</a>
+                  <a href="https://galexx-mx.myzenith.space" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-neon/60 hover:text-white transition tracking-wide">Ver demo →</a>
           </div>
         </article>
 
@@ -1113,8 +1270,8 @@
           </div>
           <div>
             <div class="font-mono text-xs uppercase tracking-wider text-neon mb-3">Después · demo</div>
-            <div class="browser" style="border-color:#F5A623">
-              <div class="bar"><span class="dot" style="background:#F5A623"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="browser" style="border-color:rgba(255,255,255,0.25)">
+              <div class="bar"><span class="dot" style="background:rgba(255,255,255,0.5)"></span><span class="dot"></span><span class="dot"></span></div>
               <div class="p-6 bg-black min-h-[180px]">
                 <div class="font-display font-bold text-2xl text-white">Comemos rico, <span class="text-neon">pedimos fácil.</span></div>
                 <div class="text-dim text-xs mt-2">Menú QR, promociones y contacto en una sola ruta</div>
@@ -1140,8 +1297,8 @@
           </div>
           <div>
             <div class="font-mono text-xs uppercase tracking-wider text-neon mb-3">Después · demo</div>
-            <div class="browser" style="border-color:#F5A623">
-              <div class="bar"><span class="dot" style="background:#F5A623"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="browser" style="border-color:rgba(255,255,255,0.25)">
+              <div class="bar"><span class="dot" style="background:rgba(255,255,255,0.5)"></span><span class="dot"></span><span class="dot"></span></div>
               <div class="p-6 bg-black min-h-[180px]">
                 <div class="font-display font-bold text-2xl text-white">Tu consulta, <span class="text-neon">sin fricción.</span></div>
                 <div class="text-dim text-xs mt-2">Agenda por WhatsApp con preguntas frecuentes visibles</div>
@@ -1351,7 +1508,7 @@
             <div id="diagScoreCircle" class="relative w-14 h-14 shrink-0">
               <svg viewBox="0 0 56 56" class="w-full h-full -rotate-90">
                 <circle cx="28" cy="28" r="22" stroke="#1F1F1F" stroke-width="5" fill="none"/>
-                <circle id="diagRingEl" cx="28" cy="28" r="22" stroke="#F5A623" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1);"/>
+                <circle id="diagRingEl" cx="28" cy="28" r="22" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" style="transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1);"/>
               </svg>
               <div class="absolute inset-0 flex items-center justify-center">
                 <span id="diagScoreNum" class="font-display font-bold text-lg text-white">0</span>
@@ -1431,10 +1588,10 @@
             <div class="mt-8 space-y-5">
               <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-lg bg-neon/[0.06] border border-neon/20 hover:bg-neon/10 transition group">
                 <div class="w-10 h-10 rounded-full bg-neon/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#F5A623"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 </div>
                 <div>
-                  <div class="font-semibold text-sm text-white group-hover:text-neon transition">WhatsApp</div>
+                  <div class="font-semibold text-sm text-white group-hover:text-white transition">WhatsApp</div>
                   <div class="text-xs text-white/40">+52 479 152 7895</div>
                 </div>
               </a>
@@ -1466,36 +1623,36 @@
       <div class="grid md:grid-cols-4 gap-12">
         <div class="md:col-span-2">
           <a href="#top" class="flex items-center gap-2">
-            <span class="font-mono text-neon">&gt;_</span>
-            <span class="font-display font-bold tracking-tight">ZENITH CODE</span>
+            <span class="font-mono text-white/50">&gt;_</span>
+            <span class="font-display font-semibold tracking-tight">ZENITH CODE</span>
           </a>
-          <p class="mt-6 font-display font-bold text-3xl md:text-4xl">Código que <span class="text-neon">vende.</span></p>
+          <p class="mt-6 font-display font-semibold text-3xl md:text-4xl">Código que <span class="text-white">vende.</span></p>
           <p class="mt-4 text-dim max-w-sm">Agencia de desarrollo web y automatización en León, Guanajuato. Servimos a todo el Bajío y México.</p>
         </div>
         <div>
           <p class="font-mono text-xs uppercase tracking-wider text-dimmer">Contacto</p>
           <ul class="mt-5 space-y-3 text-sm">
-            <li><a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code" target="_blank" rel="noopener noreferrer" class="text-white hover:text-neon transition">WhatsApp +52 479 152 7895</a></li>
-            <li><a href="mailto:zenithcode.leon@gmail.com" class="text-white hover:text-neon transition font-medium">zenithcode.leon@gmail.com</a></li>
+            <li><a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code" target="_blank" rel="noopener noreferrer" class="text-white hover:text-white/70 transition">WhatsApp +52 479 152 7895</a></li>
+            <li><a href="mailto:zenithcode.leon@gmail.com" class="text-white hover:text-white/70 transition font-medium">zenithcode.leon@gmail.com</a></li>
             <li class="text-dim">León, Guanajuato</li>
             <li class="text-dim">Lun – Sáb · 9:00 – 20:00</li>
           </ul>
           <p class="mt-8 font-mono text-xs uppercase tracking-wider text-dimmer">Redes</p>
           <ul class="mt-5 space-y-3 text-sm">
             <li>
-              <a href="https://instagram.com/zenithcode_gto" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-neon transition">
+              <a href="https://instagram.com/zenithcode_gto" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-white transition">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 @zenithcode_gto
               </a>
             </li>
             <li>
-              <a href="https://www.tiktok.com/@zenithcodeleon?_r=1&_t=ZT-96SNlROVwyr" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-neon transition">
+              <a href="https://www.tiktok.com/@zenithcodeleon?_r=1&_t=ZT-96SNlROVwyr" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-white transition">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
                 @zenithcodeleon
               </a>
             </li>
             <li>
-              <a href="https://www.facebook.com/share/1An3iCQXpP/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-neon transition">
+              <a href="https://www.facebook.com/share/1An3iCQXpP/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-dim hover:text-white transition">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 Facebook
               </a>
@@ -1524,8 +1681,8 @@
   <!-- ============== STICKY CHAT AND WHATSAPP ============== -->
   <a href="andres-zenithcode.html"
      aria-label="Chatear con Andres, agente IA"
-     class="zenith-hidden fixed bottom-24 right-5 z-50 w-14 h-14 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform border border-neon/40"
-     style="box-shadow: 0 0 0 1px rgba(245,166,35,0.35), 0 10px 40px -10px rgba(245,166,35,0.55);">
+     class="zenith-hidden fixed bottom-24 right-5 z-50 w-14 h-14 rounded-full glass-strong text-white flex items-center justify-center hover:scale-105 transition-transform"
+     style="box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
     <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7" aria-hidden="true">
       <path d="M12 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       <path d="M8 3h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -1542,26 +1699,26 @@
   <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto"
      target="_blank" rel="noopener noreferrer"
      aria-label="Chatear por WhatsApp"
-     class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-neon text-black flex items-center justify-center hover:scale-105 transition-transform"
-     style="box-shadow: 0 0 0 1px #F5A623, 0 10px 40px -10px rgba(245,166,35,0.6);">
+     class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full btn-primary flex items-center justify-center hover:scale-105 transition-transform"
+     style="box-shadow: 0 8px 32px rgba(255,255,255,0.15);">
     <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M19.05 4.91A10 10 0 0 0 12 2C6.48 2 2 6.48 2 12c0 1.76.46 3.45 1.34 4.95L2 22l5.18-1.36A10 10 0 0 0 12 22c5.52 0 10-4.48 10-10a9.97 9.97 0 0 0-2.95-7.09zM12 20.13c-1.55 0-3.07-.42-4.4-1.2l-.31-.18-3.07.81.82-3-.2-.32A8.13 8.13 0 1 1 20.13 12c0 4.49-3.64 8.13-8.13 8.13zm4.7-6.1c-.26-.13-1.52-.75-1.76-.83-.24-.09-.41-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.27-1.51-1.42-1.77-.15-.26-.02-.4.11-.53.11-.11.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.58-1.41-.8-1.93-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.45.06-.69.32-.24.26-.9.88-.9 2.15s.92 2.49 1.05 2.66c.13.17 1.82 2.78 4.41 3.9.62.27 1.1.43 1.47.55.62.2 1.18.17 1.62.1.5-.07 1.52-.62 1.74-1.22.21-.6.21-1.11.15-1.22-.06-.11-.24-.17-.5-.3z"/></svg>
   </a>
 
 
   <!-- ============== TERMINAL MODAL ============== -->
-  <div id="terminal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="w-full max-w-2xl rounded-xl border border-neon/50 bg-black overflow-hidden shadow-[0_0_80px_-10px_rgba(245,166,35,0.5)]">
-      <div class="flex items-center gap-2 px-4 py-2 border-b border-white/[0.06] bg-panel">
+  <div id="terminal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+    <div class="w-full max-w-2xl rounded-2xl glass-strong overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-white/[0.08] bg-white/[0.03]">
         <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
         <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
-        <span class="w-2.5 h-2.5 rounded-full bg-neon"></span>
-        <span class="ml-3 text-[11px] text-dimmer">zenith@bajio:~ — escribe <span class="text-neon">help</span> para ver comandos · ESC para cerrar</span>
-        <button id="termClose" class="ml-auto text-dimmer hover:text-neon text-sm">✕</button>
+        <span class="w-2.5 h-2.5 rounded-full bg-white/60"></span>
+        <span class="ml-3 text-[11px] text-dimmer">zenith@bajio:~ — escribe <span class="text-white">help</span> para ver comandos · ESC para cerrar</span>
+        <button id="termClose" class="ml-auto text-dimmer hover:text-white text-sm">✕</button>
       </div>
       <div id="termBody" class="p-4 sm:p-5 h-[60vh] sm:h-[420px] overflow-y-auto text-[13px] leading-relaxed">
         <div class="term-out text-dim"></div>
         <div class="flex items-baseline gap-2">
-          <span class="text-neon">zenith@bajio</span><span class="text-dim">:</span><span class="text-white">~</span><span class="text-dim">$</span>
+          <span class="text-white">zenith@bajio</span><span class="text-dim">:</span><span class="text-white">~</span><span class="text-dim">$</span>
           <input id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" />
         </div>
       </div>
@@ -1571,6 +1728,33 @@
 
   <script src="/assets/zc.guard.js" defer></script>
   <script src="/assets/zc.app.js" defer></script>
+  <script>
+    /* Calendario mensual — solo UI, sin configuración de backend */
+    (function () {
+      var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      var ABREV = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      var idx = new Date().getMonth();
+      var nombre = MESES[idx];
+
+      ['mesCupo', 'mesHero'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = nombre;
+      });
+
+      var strip = document.getElementById('monthStrip');
+      if (strip) {
+        ABREV.forEach(function (abrev, i) {
+          var pill = document.createElement('span');
+          pill.className = 'month-pill' + (i === idx ? ' is-current' : i < idx ? ' is-past' : '');
+          pill.textContent = abrev;
+          pill.setAttribute('role', 'listitem');
+          pill.setAttribute('aria-label', MESES[i] + (i === idx ? ' (actual)' : ''));
+          strip.appendChild(pill);
+        });
+      }
+    })();
+  </script>
+</div>
 </body>
   </html>
   
