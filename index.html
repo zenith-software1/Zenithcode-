@@ -535,14 +535,13 @@
       </button>
     </div>
     <nav class="container-x flex-1 flex flex-col justify-center gap-1 py-10">
-      <a href="#nosotros" class="menu-link">Nosotros <span class="arr">→</span></a>
-      <a href="#servicios" class="menu-link">Servicios <span class="arr">→</span></a>
-      <a href="andres-zenithcode.html" class="menu-link zenith-hidden">Agente IA <span class="arr">→</span></a>
-      <a href="#resultados" class="menu-link">Demos <span class="arr">→</span></a>
-      <a href="#blog" class="menu-link">Blog <span class="arr">→</span></a>
-      <a href="#cotizador" class="menu-link">Cotizador <span class="arr">→</span></a>
-      <a href="#faq" class="menu-link">FAQ <span class="arr">→</span></a>
-      <a href="#contacto" class="menu-link text-white">Contacto <span class="arr">→</span></a>
+      <a href="#servicios" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Servicios <span class="arr">→</span></a>
+      <a href="#resultados" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Demos <span class="arr">→</span></a>
+      <a href="#nosotros" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Sobre Zenith <span class="arr">→</span></a>
+      <a href="#cotizador" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Cotizador <span class="arr">→</span></a>
+      <a href="#blog" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Blog <span class="arr">→</span></a>
+      <a href="#faq" class="menu-link" onclick="document.getElementById('mobileMenu').classList.add('hidden')">FAQ <span class="arr">→</span></a>
+      <a href="#contacto" class="menu-link text-white" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Contacto <span class="arr">→</span></a>
     </nav>
     <div class="container-x py-6 border-t border-white/[0.06] space-y-3">
       <a href="https://wa.me/524791527895?text=Hola%20Zenith%20Code%2C%20quiero%20cotizar%20mi%20proyecto" target="_blank" rel="noopener noreferrer" class="btn-primary flex items-center justify-center gap-2 px-5 py-4 rounded-lg font-mono text-sm uppercase">
@@ -790,7 +789,7 @@
   </section>
 
   <!-- ============== SOBRE ZENITH CODE ============== -->
-  <section class="py-28 md:py-36 border-t border-white/[0.06]">
+  <section id="nosotros" class="py-28 md:py-36 border-t border-white/[0.06]">
     <div class="container-x">
       <div class="max-w-3xl reveal">
         <p class="text-xs uppercase tracking-[0.3em] text-neon/70">Sobre Zenith Code</p>
@@ -1390,13 +1389,13 @@
           <p class="font-mono text-xs text-dimmer">5 min lectura · SEO local</p>
           <h3 class="mt-4 font-display font-bold text-2xl">Desarrollo web en León: qué pedir antes de contratar</h3>
           <p class="mt-4 text-dim leading-relaxed">Dominio, hosting, soporte y tiempos de entrega. Lo que debe incluir cualquier cotización seria en el Bajío.</p>
-          <a href="blog/desarrollo-web-leon.html" class="mt-6 inline-flex items-center gap-2 text-neon font-mono text-sm hover:gap-3 transition-all">Leer artículo →</a>
+          <a href="blog/desarrollo-web-leon.html" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-neon font-mono text-sm hover:gap-3 transition-all">Leer artículo →</a>
         </article>
         <article class="card rounded-2xl p-8 reveal">
           <p class="font-mono text-xs text-dimmer">4 min lectura · Rendimiento</p>
           <h3 class="mt-4 font-display font-bold text-2xl">Por qué tu página carga lento (y cuántos clientes pierdes)</h3>
           <p class="mt-4 text-dim leading-relaxed">Si tarda más de 3 segundos en celular, más de la mitad de tus visitas se van antes de ver tu menú o tu teléfono.</p>
-          <a href="blog/pagina-carga-lento.html" class="mt-6 inline-flex items-center gap-2 text-neon font-mono text-sm hover:gap-3 transition-all">Leer artículo →</a>
+          <a href="blog/pagina-carga-lento.html" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center gap-2 text-neon font-mono text-sm hover:gap-3 transition-all">Leer artículo →</a>
         </article>
       </div>
     </div>
