@@ -1758,6 +1758,36 @@
         form.addEventListener('submit', openWhatsAppFromForm);
       }
     })();
+
+    /* Mobile menu toggle */
+    (function () {
+      var menuBtn = document.getElementById('menuBtn');
+      var menuClose = document.getElementById('menuClose');
+      var mobileMenu = document.getElementById('mobileMenu');
+
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function () {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('flex');
+        });
+      }
+
+      if (menuClose) {
+        menuClose.addEventListener('click', function () {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('flex');
+        });
+      }
+
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', function (e) {
+          if (e.target === mobileMenu) {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+          }
+        });
+      }
+    })();
   </script>
 </div>
 </body>
