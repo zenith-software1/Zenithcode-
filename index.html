@@ -1722,43 +1722,6 @@
       }
     })();
 
-    (function () {
-      function openWhatsAppFromForm(event) {
-        event.preventDefault();
-        var form = document.getElementById('contactForm');
-        var name = document.getElementById('contactName');
-        var email = document.getElementById('contactEmail');
-        var project = document.getElementById('contactType');
-        var message = document.getElementById('contactMsg');
-        var label = (project && project.value) ? project.options[project.selectedIndex].text : 'Proyecto';
-        var text = [
-          'Hola Zenith Code, quiero cotizar mi proyecto.',
-          'Nombre: ' + (name && name.value ? name.value : 'No especificado'),
-          'Email: ' + (email && email.value ? email.value : 'No especificado'),
-          'Tipo de proyecto: ' + label,
-          'Detalle: ' + (message && message.value ? message.value : 'Sin detalle adicional')
-        ].join('\n');
-
-        window.open('https://wa.me/524791527895?text=' + encodeURIComponent(text), '_blank', 'noopener');
-
-        if (window.dataLayer) {
-          window.dataLayer.push({ event: 'whatsapp_click', event_category: 'Conversión', event_label: 'contact_form', value: 1 });
-        }
-
-        var success = document.getElementById('contactSuccess');
-        if (success) {
-          success.classList.remove('hidden');
-          success.textContent = 'Continuamos en WhatsApp. Te responderemos pronto.';
-        }
-        form.reset();
-      }
-
-      var form = document.getElementById('contactForm');
-      if (form) {
-        form.addEventListener('submit', openWhatsAppFromForm);
-      }
-    })();
-
     /* Mobile menu toggle */
     (function () {
       var menuBtn = document.getElementById('menuBtn');
@@ -1789,6 +1752,8 @@
       }
     })();
   </script>
+  <script src="/assets/zc.guard.js" defer></script>
+  <script src="/assets/zc.app.js" defer></script>
 </div>
 </body>
   </html>
