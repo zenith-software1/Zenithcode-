@@ -165,12 +165,12 @@
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       try {
-        var name = (get('contactName').value || '').trim().slice(0, 100);
-        var email = (get('contactEmail').value || '').trim().slice(0, 160);
         var type = (get('contactType').value || '').trim().slice(0, 80);
         var message = (get('contactMsg').value || '').trim().slice(0, 1000);
-        if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Completa nombre, email válido y mensaje.');
-        var text = 'Hola Zenith Code. Nombre: ' + name + '. Email: ' + email + '. Servicio: ' + type + '. Mensaje: ' + message;
+        var details = [];
+        if (type) details.push('Servicio: ' + type);
+        if (message) details.push('Detalle: ' + message);
+        var text = 'Hola Zenith Code, quiero cotizar un proyecto.' + (details.length ? '\n' + details.join('\n') : '');
         window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
         var success = get('contactSuccess');
         if (success) { success.textContent = 'Mensaje preparado en WhatsApp.'; success.classList.remove('hidden'); }
