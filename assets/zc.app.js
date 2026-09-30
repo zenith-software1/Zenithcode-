@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var WHATSAPP_NUMBER = '528138781692';
+  var WHATSAPP_NUMBER = '524772317941';
   var currency = new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',
