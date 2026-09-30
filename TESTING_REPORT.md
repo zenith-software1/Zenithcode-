@@ -133,3 +133,26 @@ Commits implementados:
 ---
 
 **Status Final: ✅ LISTO PARA PRODUCCIÓN**
+
+---
+
+## Barrido funcional automatizado · 29 de septiembre de 2026
+
+Pruebas ejecutadas con Chromium sobre `https://myzenith.space/` y una vista móvil de 390 px. Se ejercitaron los controles y estados; no se hicieron pruebas en dispositivos físicos ni en otros motores de navegador.
+
+| Función | Resultado observado |
+| --- | --- |
+| Navegación: 24 enlaces de ancla | 24 destinos presentes; 0 destinos rotos |
+| Calculadora de pérdidas | 4,000 visitas, ticket $1,000 y conversión 2%: hoy $80,000, proyección $144,000, diferencia $64,000 |
+| Cotizador | Automatización estándar + SEO + hosting: $8,750; enlace generado con el número de WhatsApp configurado |
+| Demos adicionales | Abrir/cerrar probado; las 3 imágenes cargaron a 800 px de ancho |
+| FAQ | Abrir y cerrar una respuesta probado |
+| Contacto | WhatsApp abre con campos opcionales vacíos y con servicio/detalle; ambos casos probados |
+| Terminal | Abre, responde `help` y cierra |
+| Diagnóstico | 6 respuestas mixtas producen resultado; reinicio vuelve a la primera pregunta |
+| Menú móvil | Abre y se cierra al navegar; en viewport 390 px no hay desbordamiento horizontal (375 px de ancho de contenido) |
+| Páginas enlazadas | Artículo de desarrollo web y aviso de privacidad cargaron correctamente |
+
+Hallazgo corregido durante el barrido: el servicio de automatización tenía comillas escapadas en su marcado HTML; sus enlaces de WhatsApp y demo generaban URLs inválidas. Se normalizaron los atributos. También se versionó la URL del script de contacto para evitar una copia cacheada antigua. El aviso de privacidad se actualizó para reflejar que tipo de proyecto y detalle son opcionales.
+
+Observación pendiente de infraestructura: la consola de producción mostró que las directivas `frame-ancestors` y `X-Frame-Options` no son válidas dentro de `<meta>`, y que el beacon de Cloudflare Insights está bloqueado por la CSP. Aplicar las cabeceras anti-iframe requiere configuración del hosting; habilitar el beacon requiere autorizar su origen en la CSP si se desea usarlo.
